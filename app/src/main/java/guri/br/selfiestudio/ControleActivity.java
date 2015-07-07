@@ -51,6 +51,8 @@ public class ControleActivity extends Activity{
             @Override
             public void onClick(View v) {
 
+                Toast.makeText(getApplicationContext(), "RECEBENDO FOTO", Toast.LENGTH_SHORT).show();
+
                 String num = "-1";
                 try {
                     if (MainActivity.os != null) {

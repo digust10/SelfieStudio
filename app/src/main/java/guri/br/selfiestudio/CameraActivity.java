@@ -77,8 +77,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                 // TODO Auto-generated method stub
                 Camera.Parameters p = camera.getParameters();
                 p.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
-                p.set("orientation", "portrait");
-                p.set("rotation", 90);
+                //p.set("orientation", "portrait");
+                //p.set("rotation", 90);
                 camera.setParameters(p);
                 camera.takePicture(myShutterCallback,
                         myPictureCallback_RAW, myPictureCallback_JPG);
