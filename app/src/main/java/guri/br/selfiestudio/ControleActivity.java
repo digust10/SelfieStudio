@@ -1,5 +1,6 @@
 package guri.br.selfiestudio;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -7,12 +8,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -29,6 +33,7 @@ import java.util.Date;
 public class ControleActivity extends Activity{
 
     Button takePicture;
+    ViewGroup controleLayout;
 
     private static final int TIRAR_FOTO = 0;
     private static final int RECEBER_FOTO = 1;
@@ -42,12 +47,15 @@ public class ControleActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controle);
 
+        controleLayout = (ViewGroup) findViewById(R.id.controle_layout);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         mTelaHandler = new TelaHandler();
 
         takePicture = (Button) findViewById(R.id.tirar_foto);
         takePicture.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
 
@@ -63,12 +71,14 @@ public class ControleActivity extends Activity{
                     mTelaHandler.obtainMessage(MSG_DESCONECTOU, e.getMessage() + "[0]").sendToTarget();
                 }
                 takePicture.setClickable(false);
+                buttonDisappear();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        //buttonAppear();
                         takePicture.setClickable(true);
                     }
-                }, 3000);
+                }, 3500);
 
 
                 //SystemClock.sleep(1700);
@@ -77,6 +87,24 @@ public class ControleActivity extends Activity{
         });
 
 
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void buttonDisappear() {
+        TransitionManager.beginDelayedTransition(controleLayout);
+        ViewGroup.LayoutParams sizeRules = takePicture.getLayoutParams();
+        sizeRules.width = 1;
+        sizeRules.height = 1;
+        takePicture.setLayoutParams(sizeRules);
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    private void buttonAppear(){
+        TransitionManager.beginDelayedTransition(controleLayout);
+        ViewGroup.LayoutParams sizeRules = takePicture.getLayoutParams();
+        sizeRules.width = 180;
+        sizeRules.height = 180;
+        takePicture.setLayoutParams(sizeRules);
     }
 
     public class TelaHandler extends Handler {
@@ -98,6 +126,8 @@ public class ControleActivity extends Activity{
                         ImageView image = (ImageView) findViewById(R.id.image);
                         Bitmap bMap = BitmapFactory.decodeByteArray(fotoBytes, 0, fotoBytes.length);
                         image.setImageBitmap(bMap);
+
+                        buttonAppear();
 
                         // salva a imagem no storage
                         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
