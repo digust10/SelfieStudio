@@ -10,8 +10,10 @@
         android:layout_height="300dp"
         android:gravity="center"
         android:layout_gravity="top"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true">
+        android:id="@+id/imageLayout"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <ImageView
             android:id="@+id/image"
@@ -23,17 +25,24 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/tirar_foto"
-        android:clickable="true"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="bottom"
-        android:layout_margin="20dp"
-        style="?android:attr/borderlessButtonStyle"
-        android:background="@drawable/take_remote_picture_button_custom"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/button_layout">
+
+        <Button
+            android:id="@+id/tirar_foto"
+            android:clickable="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/camera_mode_button_custom"/>
+
+    </RelativeLayout>
 
 
 

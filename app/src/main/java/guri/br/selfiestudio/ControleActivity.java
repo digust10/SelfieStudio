@@ -34,6 +34,7 @@ public class ControleActivity extends Activity{
 
     Button takePicture;
     ViewGroup controleLayout;
+    ViewGroup buttonLayout;
 
     private static final int TIRAR_FOTO = 0;
     private static final int RECEBER_FOTO = 1;
@@ -48,6 +49,7 @@ public class ControleActivity extends Activity{
         setContentView(R.layout.activity_controle);
 
         controleLayout = (ViewGroup) findViewById(R.id.controle_layout);
+        buttonLayout = (ViewGroup) findViewById(R.id.button_layout);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -70,16 +72,9 @@ public class ControleActivity extends Activity{
                     e.printStackTrace();
                     mTelaHandler.obtainMessage(MSG_DESCONECTOU, e.getMessage() + "[0]").sendToTarget();
                 }
-                takePicture.setClickable(false);
-                buttonDisappear();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        //buttonAppear();
-                        takePicture.setClickable(true);
-                    }
-                }, 3500);
 
+                buttonDisappear();
+                //buttonAppear();
 
                 //SystemClock.sleep(1700);
 
@@ -91,20 +86,37 @@ public class ControleActivity extends Activity{
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void buttonDisappear() {
-        TransitionManager.beginDelayedTransition(controleLayout);
+        takePicture.setClickable(false);
+        TransitionManager.beginDelayedTransition(buttonLayout);
         ViewGroup.LayoutParams sizeRules = takePicture.getLayoutParams();
         sizeRules.width = 1;
         sizeRules.height = 1;
         takePicture.setLayoutParams(sizeRules);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                takePicture.setVisibility(View.INVISIBLE);
+            }
+        }, 300);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void buttonAppear(){
-        TransitionManager.beginDelayedTransition(controleLayout);
-        ViewGroup.LayoutParams sizeRules = takePicture.getLayoutParams();
-        sizeRules.width = 180;
-        sizeRules.height = 180;
-        takePicture.setLayoutParams(sizeRules);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                takePicture.setVisibility(View.VISIBLE);
+                takePicture.setClickable(true);
+
+                TransitionManager.beginDelayedTransition(buttonLayout);
+                ViewGroup.LayoutParams sizeRules = takePicture.getLayoutParams();
+                sizeRules.width = 150;
+                sizeRules.height = 150;
+                takePicture.setLayoutParams(sizeRules);
+            }
+        }, 100);
     }
 
     public class TelaHandler extends Handler {
