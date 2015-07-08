@@ -40,7 +40,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             style="?android:attr/borderlessButtonStyle"
-            android:background="@drawable/camera_mode_button_custom"/>
+            android:background="@drawable/take_remote_picture_button_custom"/>
 
     </RelativeLayout>
 
