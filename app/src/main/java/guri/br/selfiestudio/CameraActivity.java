@@ -2,9 +2,6 @@ package guri.br.selfiestudio;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,25 +14,24 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.SystemClock;
+import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -47,6 +43,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     boolean previewing = false;
     LayoutInflater controlInflater = null;
     public static Button buttonTakePicture;
+    ViewGroup cameraLayout;
 
 
     /** Called when the activity is first created. */
@@ -70,6 +67,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                 LayoutParams.FILL_PARENT);
         this.addContentView(viewControl, layoutParamsControl);
 
+        cameraLayout = (ViewGroup) findViewById(R.id.camera_layout);
+
         buttonTakePicture = (Button)findViewById(R.id.takepicture);
         buttonTakePicture.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -82,7 +81,44 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                 camera.setParameters(p);
                 camera.takePicture(myShutterCallback,
                         myPictureCallback_RAW, myPictureCallback_JPG);
+                buttonDisappear();
+                buttonAppear();
             }});
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public void buttonDisappear() {
+        buttonTakePicture.setClickable(false);
+        TransitionManager.beginDelayedTransition(cameraLayout);
+        buttonTakePicture.setVisibility(View.INVISIBLE);
+        LayoutParams sizeRules = buttonTakePicture.getLayoutParams();
+        sizeRules.width = 1;
+        sizeRules.height = 1;
+        buttonTakePicture.setLayoutParams(sizeRules);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+            }
+        }, 300);
+    }
+
+    @TargetApi(Build.VERSION_CODES.KITKAT)
+    public void buttonAppear(){
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                buttonTakePicture.setVisibility(View.VISIBLE);
+                buttonTakePicture.setClickable(true);
+
+                TransitionManager.beginDelayedTransition(cameraLayout);
+                ViewGroup.LayoutParams sizeRules = buttonTakePicture.getLayoutParams();
+                sizeRules.width = 150;
+                sizeRules.height = 150;
+                buttonTakePicture.setLayoutParams(sizeRules);
+            }
+        }, 3000);
     }
 
     protected void onPause() {

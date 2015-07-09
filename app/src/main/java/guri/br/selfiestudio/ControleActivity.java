@@ -2,7 +2,6 @@ package guri.br.selfiestudio;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +11,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.transition.TransitionManager;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +47,7 @@ public class ControleActivity extends Activity{
         setContentView(R.layout.activity_controle);
 
         controleLayout = (ViewGroup) findViewById(R.id.controle_layout);
-        buttonLayout = (ViewGroup) findViewById(R.id.button_layout);
+        buttonLayout = (ViewGroup) findViewById(R.id.controle_button_layout);
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
