@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.io.File;
@@ -110,8 +111,8 @@ public class ControleActivity extends Activity{
 
                 TransitionManager.beginDelayedTransition(buttonLayout);
                 ViewGroup.LayoutParams sizeRules = takePicture.getLayoutParams();
-                sizeRules.width = 150;
-                sizeRules.height = 150;
+                sizeRules.width = 180;
+                sizeRules.height = 180;
                 takePicture.setLayoutParams(sizeRules);
             }
         }, 100);
@@ -136,6 +137,7 @@ public class ControleActivity extends Activity{
                         ImageView image = (ImageView) findViewById(R.id.image);
                         Bitmap bMap = BitmapFactory.decodeByteArray(fotoBytes, 0, fotoBytes.length);
                         image.setImageBitmap(bMap);
+                        image.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
                         buttonAppear();
 

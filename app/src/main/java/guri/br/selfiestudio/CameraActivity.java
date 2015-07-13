@@ -114,8 +114,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
                 TransitionManager.beginDelayedTransition(cameraLayout);
                 ViewGroup.LayoutParams sizeRules = buttonTakePicture.getLayoutParams();
-                sizeRules.width = 150;
-                sizeRules.height = 150;
+                sizeRules.width = 180;
+                sizeRules.height = 180;
                 buttonTakePicture.setLayoutParams(sizeRules);
             }
         }, 3000);
