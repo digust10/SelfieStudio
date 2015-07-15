@@ -48,7 +48,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Claudivan Filhoo \n Diego Ernesto \n Lucas Ribeiro \n Nicolas Gabriel"
+        android:text="Claudivan Filho \n Diego Ernesto \n Lucas Ribeiro \n Mônica Cavalcante \n Nicolas Gabriel"
         android:textColor="#eeeeee"
         android:textSize="18sp"
         android:layout_below="@+id/textView3"

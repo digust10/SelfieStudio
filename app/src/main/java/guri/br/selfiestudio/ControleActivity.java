@@ -39,9 +39,13 @@ public class ControleActivity extends Activity{
     private static final int RECEBER_FOTO = 1;
     private static final int MSG_DESCONECTOU = 2;
 
+    int buttonWidth;
+    int buttonHeidht;
+
     public static TelaHandler mTelaHandler;
 
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,10 +59,14 @@ public class ControleActivity extends Activity{
         mTelaHandler = new TelaHandler();
 
         takePicture = (Button) findViewById(R.id.tirar_foto);
+
+
         takePicture.setOnClickListener(new View.OnClickListener() {
             @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
+                buttonWidth = takePicture.getWidth();
+                buttonHeidht = takePicture.getHeight();
 
                 Toast.makeText(getApplicationContext(), "RECEBENDO FOTO", Toast.LENGTH_SHORT).show();
 
@@ -85,9 +93,11 @@ public class ControleActivity extends Activity{
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void buttonDisappear() {
+
         takePicture.setClickable(false);
         TransitionManager.beginDelayedTransition(buttonLayout);
         ViewGroup.LayoutParams sizeRules = takePicture.getLayoutParams();
+
         sizeRules.width = 1;
         sizeRules.height = 1;
         takePicture.setLayoutParams(sizeRules);
@@ -111,8 +121,8 @@ public class ControleActivity extends Activity{
 
                 TransitionManager.beginDelayedTransition(buttonLayout);
                 ViewGroup.LayoutParams sizeRules = takePicture.getLayoutParams();
-                sizeRules.width = 180;
-                sizeRules.height = 180;
+                sizeRules.width = buttonWidth;
+                sizeRules.height = buttonHeidht;
                 takePicture.setLayoutParams(sizeRules);
             }
         }, 100);

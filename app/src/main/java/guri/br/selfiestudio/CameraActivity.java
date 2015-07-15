@@ -44,6 +44,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
     LayoutInflater controlInflater = null;
     public static Button buttonTakePicture;
     ViewGroup cameraLayout;
+    private int buttonWidth;
+    private int buttonHeidht;
 
 
     /** Called when the activity is first created. */
@@ -74,6 +76,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
+                buttonWidth = buttonTakePicture.getWidth();
+                buttonHeidht = buttonTakePicture.getHeight();
                 Camera.Parameters p = camera.getParameters();
                 p.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
                 //p.set("orientation", "portrait");
@@ -81,6 +85,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                 camera.setParameters(p);
                 camera.takePicture(myShutterCallback,
                         myPictureCallback_RAW, myPictureCallback_JPG);
+
                 buttonDisappear();
                 buttonAppear();
             }});
@@ -114,8 +119,8 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
                 TransitionManager.beginDelayedTransition(cameraLayout);
                 ViewGroup.LayoutParams sizeRules = buttonTakePicture.getLayoutParams();
-                sizeRules.width = 180;
-                sizeRules.height = 180;
+                sizeRules.width = buttonWidth;
+                sizeRules.height = buttonHeidht;
                 buttonTakePicture.setLayoutParams(sizeRules);
             }
         }, 3000);
