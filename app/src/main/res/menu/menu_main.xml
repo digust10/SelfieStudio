@@ -1,9 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/action_servidor"
+    <item android:id="@+id/action_ajuda"
         android:title="@string/acao_iniciar_servidor"
         app:showAsAction="never" />
-    <item android:id="@+id/action_cliente"
+    <item android:id="@+id/action_sobre"
         android:title="@string/acao_iniciar_cliente"
         app:showAsAction="never" />
 </menu>

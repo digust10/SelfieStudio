@@ -1,7 +1,6 @@
 package guri.br.selfiestudio;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -30,21 +29,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.Console;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
-public class MainActivity extends Activity
+public class MainActivity extends ActionBarActivity
         implements View.OnClickListener, DialogInterface.OnClickListener,
         DialogInterface.OnCancelListener {
 
@@ -148,17 +143,16 @@ public class MainActivity extends Activity
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_cliente:
-                iniciaCliente();
+            case R.id.action_sobre:
+                Intent intent = new Intent(getApplicationContext(), AboutActivity.class);
+                startActivity(intent);
                 break;
 
-            case R.id.action_servidor:
-                iniciaServidor();
-
-
+            case R.id.action_ajuda:
+                Toast.makeText(getApplicationContext(), "O botão VERMELHO inicia a aplicação em modo CÂMERA", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "O botão AZUL inicia a aplicação em modo CONTROLE", Toast.LENGTH_LONG).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
