@@ -157,7 +157,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
         @Override
         public void onPictureTaken(byte[] arg0, Camera arg1) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(arg0, 0, arg0.length);
+            //Bitmap bitmap = BitmapFactory.decodeByteArray(arg0, 0, arg0.length);
             if (isExternalStorageWritable()) {
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 File f = getAlbumStorageDir("SelfieStudio");
@@ -198,17 +198,17 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
                         //int tamanhoDaImagem = imageBytes.length;
                         byte[] oneByte = new byte[1];
 
-                        DataOutputStream os = MainActivity.mThreadComunicacao.getOutputStream();
-                        //os.write(tamanhoDaImagem);
-                        synchronized (os){os.write(imageBytes);}
+                        DataOutputStream outputstream = MainActivity.mThreadComunicacao.getOutputStream();
+                        //outputstream.write(tamanhoDaImagem);
+                        synchronized (outputstream){outputstream.write(imageBytes);}
                         //Envia um byte para sinalizar o fim da transferência da imagem.
                         SystemClock.sleep(2000);
-                        synchronized (os){os.write(oneByte);}
+                        synchronized (outputstream){outputstream.write(oneByte);}
 
                         camera.stopPreview();
                         camera.startPreview();
 
-                        //os.write(oneByte);
+                        //outputstream.write(oneByte);
                     }
 
                 } catch (IOException e) {
@@ -259,10 +259,7 @@ public class CameraActivity extends Activity implements SurfaceHolder.Callback {
 
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
+        return Environment.MEDIA_MOUNTED.equals(state);
     }
 
     @TargetApi(Build.VERSION_CODES.FROYO)

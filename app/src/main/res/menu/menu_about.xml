@@ -2,6 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="guri.br.selfiestudio.AboutActivity">
-    <item android:id="@+id/action_settings" android:title="Voltar"
+    <item android:id="@+id/action_settings" android:title="@string/back"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

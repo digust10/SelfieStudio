@@ -386,7 +386,7 @@ public class MainActivity extends ActionBarActivity
                 // necessário criar esse outro buffer para ir adicionando os pacotes de bytes que chegam
                 // já que o array de bytes da foto não chega de uma só vez.
                 byte[] outroBuffer = null;
-                int tamanhoDaImagem = 0;
+                //int tamanhoDaImagem = 0;
 
                 while (true) {
                     //if (outroBuffer != null && outroBuffer.length == tamanhoDaImagem){
@@ -508,8 +508,7 @@ public class MainActivity extends ActionBarActivity
 
     public int converteBytesEmInt(byte[] b){
         int MASK = 0xFF;
-        int result = 0;
-        result = b[0] & MASK;
+        int result = b[0] & MASK;
         result = result + ((b[1] & MASK) << 8);
         result = result + ((b[2] & MASK) << 16);
         result = result + ((b[3] & MASK) << 24);

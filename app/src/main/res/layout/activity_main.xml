@@ -24,7 +24,7 @@
 
 
     <TextView
-        android:text="SELECIONE O MODO DE FUNCIONAMENTO"
+        android:text="@string/app_mode"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

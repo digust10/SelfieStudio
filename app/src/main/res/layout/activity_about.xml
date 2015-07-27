@@ -18,15 +18,15 @@
         android:id="@+id/imageView3" />
 
     <TextView
-        android:text="Selfie Studio"
-        android:textSize="30dp"
+        android:text="@string/app_name"
+        android:textSize="30sp"
         android:textColor="#ffffff"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView3"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView2" />
+        android:id="@+id/nameApp" />
 
     <TextView
         android:gravity="center"
@@ -35,9 +35,9 @@
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aplicativo desenvolvido pelo EmbeddedLab por:"
+        android:text="@string/app_dev"
         android:layout_marginTop="40dp"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/nameApp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
@@ -48,7 +48,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Claudivan Filho \n Diego Ernesto \n Lucas Ribeiro \n Mônica Cavalcante \n Nicolas Gabriel"
+        android:text="@string/app_team"
         android:textColor="#eeeeee"
         android:textSize="18sp"
         android:layout_below="@+id/textView3"
