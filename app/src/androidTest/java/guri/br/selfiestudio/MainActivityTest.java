@@ -29,7 +29,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         mDevice = UiDevice.getInstance(getInstrumentation());
     }
 
-    public void testDenyBT() throws Exception {
+    /*public void testDenyBT() throws Exception {
         // Deve sair do app
         mDevice.findObject(new UiSelector().textContains("Recusar")).click();
     }
@@ -41,7 +41,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         onView(withId(R.id.camera_mode)).check(matches(isDisplayed()));
         onView(withId(R.id.remote_mode)).check(matches(isDisplayed()));
         onView(withId(R.id.textView)).check(matches(isDisplayed()));
-    }
+    }*/
 
     public void testStartWithBTOn() throws Exception {
         // Nao deve pedir para ligar o Bluetooth
